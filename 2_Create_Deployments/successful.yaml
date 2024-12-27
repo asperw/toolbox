@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simulatefail
+  name: simulatefail
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: simulatefail
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simulatefail
+    spec:
+      containers:
+      - image: httpd
+        name: httpd
+        resources: {}
+status: {}
