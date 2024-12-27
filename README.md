@@ -47,3 +47,28 @@ These notes were gathered by following courses on udemy and self paced workshops
 ## Namespaces
 * If you give no indication of namespace like using `--namespace myns` or `-n myns` in commands then it will use the default namespace
 * You can choose the current working namespace with `kubectl config set-context --current --namespace=myns`
+
+## Networking
+
+* Pods are ephemeral
+* Pods are assigned ip addresses
+* You can expose a single pod with `k port-forward -n myns pods/mypod-1234567890-abdce 9000`
+* Containers can communicate on the pod level
+* Find the networking plugin used by the cni in rancher desktop with
+  * `rdctl shell bash`
+  * Find the conf in `/etc/cni` with `tree`
+
+## Services
+
+* Services provide a single entrypoint to a group of pods
+* You can create a service manually with `k expose deployment mydep --port 9000`
+* When a service is created it creates a name that is resolvable in the dns of the cluster
+* A loadbalancer service doesn't require exposing a port to reach the deployment
+
+## Ingress
+* Exposes http/s from a service
+* Provides ssl/tls termination
+* Ingress controllers
+  * Traefik
+  * Nginx
+  * Cloud provider specific
