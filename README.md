@@ -1,5 +1,7 @@
 # toolbox
 
+These notes were gathered by following courses on udemy and self paced workshops on aws
+
 ## Setup rancher desktop
 
 * Use moby container engine
@@ -27,9 +29,21 @@
 * Pods have one or more containers
 * Storage
   * Several containers can use the same storage
-* Can be edited with `k edit pod`
+* Can be edited with `k edit pod mypod`
+* Get in a pod with `k exec -it mypod -- /bin/bash`
+  * What shell and executables are available depends on the image
 
 ## Manifests
 
-* You can generate a manifest with `k run nginx-yaml --image=nginx --dry-run=client -o yaml > nginx.yaml`
-* You can update pods by applying manifests `k apply -f nginx-yaml.yaml`
+* You can generate a manifest with `k run mypod --image=nginx --dry-run=client -o yaml > mypod.yaml`
+* You can update pods by applying manifests `k apply -f mypod.yaml`
+
+## Deployments
+
+* Deployments allow you to specify the number of replicas of a container
+* You can generate a deployment with `k create deployment mydep --image=nginx --replicas=3 --dry-run=client -o yaml > mydep.yaml`
+* Deployments have strategies to update container versions
+
+## Namespaces
+* If you give no indication of namespace like using `--namespace myns` or `-n myns` in commands then it will use the default namespace
+* You can choose the current working namespace with `kubectl config set-context --current --namespace=myns`
