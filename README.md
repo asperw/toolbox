@@ -30,7 +30,7 @@ These notes were gathered by following courses on udemy and self paced workshops
 * Storage
   * Several containers can use the same storage
 * Can be edited with `k edit pod mypod`
-* Get in a pod with `k exec -it mypod -- /bin/bash`
+* Get in a pod with `k exec -it mypod -c mycontainer -- /bin/bash`
   * What shell and executables are available depends on the image
 
 ## Manifests
@@ -72,3 +72,30 @@ These notes were gathered by following courses on udemy and self paced workshops
   * Traefik
   * Nginx
   * Cloud provider specific
+
+## Storage
+* Types of volumes
+  * emptydir
+    * Initially empty
+    * All containers in pod can read and write
+    * Scratch space
+* Containers must mount the volumes
+* Persistent volume claim
+  * Have lifecycle independent of pod
+* Storage classes
+  * local-path
+  * aws ebs
+  * vsphere
+  * nfs
+* Access modes
+  * Read write once
+    * Available only on the node
+    * Forces scheduler to put all pods that need this volume here
+  * Read write many
+    * All nodes can access
+
+## K9s
+
+* Vim keybinds
+* Use `shift+a` to sort by age
+* Use `shift+s` to sort by status
