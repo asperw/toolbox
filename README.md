@@ -30,7 +30,7 @@ These notes were gathered by following courses on udemy and self paced workshops
 * Storage
   * Several containers can use the same storage
 * Can be edited with `k edit pod mypod`
-* Get in a pod with `k exec -it mypod -- /bin/bash`
+* Get in a pod with `k exec -it mypod -c mycontainer -- /bin/bash`
   * What shell and executables are available depends on the image
 
 ## Manifests
@@ -47,3 +47,71 @@ These notes were gathered by following courses on udemy and self paced workshops
 ## Namespaces
 * If you give no indication of namespace like using `--namespace myns` or `-n myns` in commands then it will use the default namespace
 * You can choose the current working namespace with `kubectl config set-context --current --namespace=myns`
+
+## Networking
+
+* Pods are ephemeral
+* Pods are assigned ip addresses
+* You can expose a single pod with `k port-forward -n myns pods/mypod-1234567890-abdce 9000`
+* Containers can communicate on the pod level
+* Find the networking plugin used by the cni in rancher desktop with
+  * `rdctl shell bash`
+  * Find the conf in `/etc/cni` with `tree`
+
+## Services
+
+* Services provide a single entrypoint to a group of pods
+* You can create a service manually with `k expose deployment mydep --port 9000`
+  * This will create a clusterip service that will allow internal only pod-to-pod communication
+* When a service is created it creates a name that is resolvable in the dns of the cluster
+* A loadbalancer service doesn't require exposing a port to reach the deployment because it includes nodeport functionality
+* Service hierarchy
+  * Loadbalancer
+    * External loadbalancer provisioning on top
+    * Nodeport functionality
+    * Clusterip functionality
+  * Nodeport
+    * An exposed port
+    * Clusterip functionality
+  * Clusterip
+    * Internal communication
+
+## Ingress
+* Exposes http/s from a service
+* Provides ssl/tls termination
+* Ingress controllers
+  * Traefik
+  * Nginx
+  * Cloud provider specific
+
+## Storage
+* Types of volumes
+  * emptydir
+    * Initially empty
+    * All containers in pod can read and write
+    * Scratch space
+* Containers must mount the volumes
+* Persistent volume claim
+  * Have lifecycle independent of pod
+* Storage classes
+  * local-path
+  * aws ebs
+  * vsphere
+  * nfs
+* Access modes
+  * Read write once
+    * Available only on the node
+    * Forces scheduler to put all pods that need this volume here
+  * Read write many
+    * All nodes can access
+
+## K9s
+
+* Vim keybinds
+* Use `shift+a` to sort by age
+* Use `shift+s` to sort by status
+
+## Configmap
+
+* Configmaps store configuration separate from app code
+* See configmaps with `kubectl get configmaps`
