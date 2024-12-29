@@ -62,8 +62,19 @@ These notes were gathered by following courses on udemy and self paced workshops
 
 * Services provide a single entrypoint to a group of pods
 * You can create a service manually with `k expose deployment mydep --port 9000`
+  * This will create a clusterip service that will allow internal only pod-to-pod communication
 * When a service is created it creates a name that is resolvable in the dns of the cluster
-* A loadbalancer service doesn't require exposing a port to reach the deployment
+* A loadbalancer service doesn't require exposing a port to reach the deployment because it includes nodeport functionality
+* Service hierarchy
+  * Loadbalancer
+    * External loadbalancer provisioning on top
+    * Nodeport functionality
+    * Clusterip functionality
+  * Nodeport
+    * An exposed port
+    * Clusterip functionality
+  * Clusterip
+    * Internal communication
 
 ## Ingress
 * Exposes http/s from a service
@@ -99,3 +110,8 @@ These notes were gathered by following courses on udemy and self paced workshops
 * Vim keybinds
 * Use `shift+a` to sort by age
 * Use `shift+s` to sort by status
+
+## Configmap
+
+* Configmaps store configuration separate from app code
+* See configmaps with `kubectl get configmaps`

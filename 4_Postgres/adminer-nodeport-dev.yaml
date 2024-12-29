@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminer-nodeport-dev
+  labels:
+    app: db
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+  selector:
+    app: db
