@@ -22,9 +22,9 @@ spec:
         app: simulatefail
     spec:
       containers:
-      - image: httpd
-        name: httpd
-        command: ["/bin/bash", "-c"]
-        args: ["sleep 5; exit 1"]
-        resources: {}
+        - image: httpd
+          name: httpd
+          command: ["/bin/bash", "-c"]
+          args: ["sleep 5; exit 1"]
+          resources: {}
 status: {}

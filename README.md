@@ -4,12 +4,11 @@ These notes were gathered by following courses on udemy and self paced workshops
 
 ## Setup rancher desktop
 
-* Use moby container engine
-* Make sure context is rancher-desktop not docker-desktop
-* Make sure kubernetes is not running in docker desktop
-* Docker desktop conflicts with rancher desktop despite appearing to run well together
+* Use dockerd (moby) container engine
+* Make sure kubernetes context is rancher-desktop not docker-desktop
+* Docker desktop conflicts with rancher desktop. Make sure it is not running
 * Make sure docker desktop does not start at login
-* Use the `kubectl` plugin with oh my zsh for autocompletion and aliases
+* Optionally use the `kubectl` plugin with oh my zsh for autocompletion and aliases
 
 ## Cluster
 
@@ -45,6 +44,7 @@ These notes were gathered by following courses on udemy and self paced workshops
 * Deployments have strategies to update container versions
 
 ## Namespaces
+
 * If you give no indication of namespace like using `--namespace myns` or `-n myns` in commands then it will use the default namespace
 * You can choose the current working namespace with `kubectl config set-context --current --namespace=myns`
 
@@ -77,6 +77,7 @@ These notes were gathered by following courses on udemy and self paced workshops
     * Internal communication
 
 ## Ingress
+
 * Exposes http/s from a service
 * Provides ssl/tls termination
 * Ingress controllers
@@ -85,6 +86,7 @@ These notes were gathered by following courses on udemy and self paced workshops
   * Cloud provider specific
 
 ## Storage
+
 * Types of volumes
   * emptydir
     * Initially empty

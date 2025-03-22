@@ -18,7 +18,7 @@ spec:
         app: mydep
     spec:
       containers:
-      - image: nginx
-        name: nginx
-        resources: {}
+        - image: nginx
+          name: nginx
+          resources: {}
 status: {}
